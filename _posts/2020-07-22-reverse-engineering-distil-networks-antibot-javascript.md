@@ -13,6 +13,7 @@ I was browsing [Whitepages](https://whitepages.com) when I noticed a request to 
 The first part of the code is the fingerprinting module.  This code is not really obfuscated, just minified (unlike the headless detection code later).  It collects a bunch of information from the browser using (mostly) standard techniques.  [According to Imperva](https://www.imperva.com/blog/the-evolution-of-hi-def-fingerprinting-in-bot-mitigation/), their "Hi-def" fingerprints encompass over 200 device attributes and has a 0% false positive rate.  The fingerprinting code appears to be based off Valve's [fingerprintjs2](https://github.com/fingerprintjs/fingerprintjs2/blob/master/fingerprint2.js) (identical function names and contents in many cases), albeit with some additions.
 
 This code collects (via JavaScript):
+
     * Browser User-Agent - ```navigator.userAgent```
     * Browser language - ```navigator.language```
     * System language (IE only) - ```navigator.systemLanguage```
