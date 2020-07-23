@@ -172,6 +172,7 @@ This gave me:
 Now, we can finally understand the headless detection portion of the code.
 
 The automated/headless browser detection code checks for the presence of:
+
     * Selenium - ```document.__driver_evaluate```
     * Selenium - ```document.__webdriver_evaluate```
     * Selenium - ```document.__selenium_evaluate```
