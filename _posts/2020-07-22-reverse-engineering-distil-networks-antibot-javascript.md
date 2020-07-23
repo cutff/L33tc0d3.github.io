@@ -14,42 +14,42 @@ The first part of the code is the fingerprinting module.  This code is not reall
 
 This code collects (via JavaScript):
 
-    * Browser User-Agent - ```navigator.userAgent```
-    * Browser language - ```navigator.language```
-    * System language (IE only) - ```navigator.systemLanguage```
-    * User language (IE only) - ```navigator.userLanguage```
-    * Screen resolution - ```screen.width```/```screen.height```
-    * Timezone offset in hours - ```(new Date).getTimezoneOffset() / -60```
-    * IndexedDB support - ```!!window.indexedDB```
-    * HTMLElement addBehavior support (IE only) - ```!!document.body.addBehavior```
-    * WebSQL support - ```!!window.openDatabase```
-    * CPU Class (IE and Firefox only) - ```navigator.cpuClass || navigator.oscpu```
-    * Browser platform - ```navigator.platform```
-    * Do Not Track support - ```navigator.doNotTrack```
-    * Browser plugins (non IE) - ```navigator.plugins``` enumeration
+    * Browser User-Agent - navigator.userAgent
+    * Browser language - navigator.language
+    * System language (IE only) - navigator.systemLanguage
+    * User language (IE only) - navigator.userLanguage
+    * Screen resolution - screen.width/screen.height
+    * Timezone offset in hours - (new Date).getTimezoneOffset() / -60
+    * IndexedDB support - !!window.indexedDB
+    * HTMLElement addBehavior support (IE only) - !!document.body.addBehavior
+    * WebSQL support - !!window.openDatabase
+    * CPU Class (IE and Firefox only) - navigator.cpuClass || navigator.oscpu
+    * Browser platform - navigator.platform
+    * Do Not Track support - navigator.doNotTrack
+    * Browser plugins (non IE) - navigator.plugins enumeration
     * ActiveX plugins (IE only) - trying/catching creating ActiveXObjects with names from a list of popular plugins
     * Canvas fingerprinting - standard method.  Creating a Canvas element, drawing some rectangles and arcs on it, along with the string "Cwm fjordbank glyphs vext quiz,", then getting the base64 PNG representation via toDataURL and hashing it
     * Font detection - using a method popularized by [Lalit Patel](https://gist.githubusercontent.com/szepeviktor/d28dfcfc889fe61763f3/raw/6bbcda9766e65fd81e951400e0ceca03c14b6fad/fontdetect.js).  Essentially, they measure the dimensions of the browsers default (fallback) monospace, sans-serif, and serif fonts.  They then measure the dimensions of a large list of fonts.  If there is a difference in dimensions between a font in the list and the fallback font, the font is installed.
-    * Video codec detection - creating a new video element and checking whether ```video.canPlayType()``` returns true for various codecs, including ```video/ogg; codecs="theora"``` (Theora with OGG), ```video/mp4; codecs="avc1.42E01E``` (H264 MP4), ```video/webm; codecs="vp8, vorbis"``` (WEBM).
-    * Audio codec detection - creating an audio element and checking whether ```audio.canPlayType``` returns true for ```audio/ogg; codecs="vorbis"``` (OGG Vorbis), ```audio/mpeg;``` (MP3), ```audio/wav; codecs="1"``` (WAV), ```audio/x-m4a;``` (M4A), ```audio/aac;``` (AAC)
-    * WebGL fingerprinting - Creates a Canvas element with a WebGL context.  Then draws a gradient object with shaders and gets the base64 string with toDataURL.  They then check for the system's max texture anisotropy.  After that, they gather GPU vendor and renderer information with the ```WEBGL_debug_renderer_info``` extension.
-    * Touch support - ```navigator.maxTouchPoints || navigator.msMaxTouchPoints``` and attempting to create a ```TouchEvent``` handler (if it's successful then touch is supported)
-    * Browser vendor - ```navigator.vendor```
-    * Browser product (should always be equal to "Gecko", even on Chrome based browsers) - ```navigator.product```
-    * Browser build number - ```navigator.productSub```
-    * Internet explorer detection through parsing ```navigator.appName```
-    * Chrome detection (worth noting that this tends to be defined on most Chromium derivatives, including Microsoft Edge) - presence of ```window.chrome```
-    * Webdriver support (the [W3C specification](https://www.w3.org/TR/webdriver/#example-1) declares that tools implementing the Webdriver browser automation standard should declare ```navigator.webdriver``` as true) - presence of ```navigator.webdriver```
-    * Current URL protocol - ```document.location.protocol```
-    * Session history length - ```window.history.length```
-    * CPU core count - ```navigator.hardwareConcurrency```
-    * Battery interface support - presence of ```navigator.getBattery```
-    * Media device (webcams, microphones, speakers) enumeration - ```navigator.mediaDevices```
-    * Cookie support - ```navigator.cookieEnabled```
-    * Browser appName (always "Netscape" on modern browsers) - ```navigator.appName```
-    * Screen Color Depth - ```screen.colorDepth```
-    * String representation of setTimeout function (used to detect tampering, it should return ```function setTimeout() { [native code] }``` but if a wrapper is being used it will return something different) - ```setTimeout.toString()```
-    * String representation of setInterval function (same reasoning as above) - ```setInterval.toString()```
+    * Video codec detection - creating a new video element and checking whether video.canPlayType() returns true for various codecs, including video/ogg; codecs="theora" (Theora with OGG), video/mp4; codecs="avc1.42E01E (H264 MP4), video/webm; codecs="vp8, vorbis" (WEBM).
+    * Audio codec detection - creating an audio element and checking whether audio.canPlayType returns true for audio/ogg; codecs="vorbis" (OGG Vorbis), audio/mpeg; (MP3), audio/wav; codecs="1" (WAV), audio/x-m4a; (M4A), audio/aac; (AAC)
+    * WebGL fingerprinting - Creates a Canvas element with a WebGL context.  Then draws a gradient object with shaders and gets the base64 string with toDataURL.  They then check for the system's max texture anisotropy.  After that, they gather GPU vendor and renderer information with the WEBGL_debug_renderer_info extension.
+    * Touch support - navigator.maxTouchPoints || navigator.msMaxTouchPoints and attempting to create a TouchEvent handler (if it's successful then touch is supported)
+    * Browser vendor - navigator.vendor
+    * Browser product (should always be equal to "Gecko", even on Chrome based browsers) - navigator.product
+    * Browser build number - navigator.productSub
+    * Internet explorer detection through parsing navigator.appName
+    * Chrome detection (worth noting that this tends to be defined on most Chromium derivatives, including Microsoft Edge) - presence of window.chrome
+    * Webdriver support (the [W3C specification](https://www.w3.org/TR/webdriver/#example-1) declares that tools implementing the Webdriver browser automation standard should declare navigator.webdriver as true) - presence of navigator.webdriver
+    * Current URL protocol - document.location.protocol
+    * Session history length - window.history.length
+    * CPU core count - navigator.hardwareConcurrency
+    * Battery interface support - presence of navigator.getBattery
+    * Media device (webcams, microphones, speakers) enumeration - navigator.mediaDevices
+    * Cookie support - navigator.cookieEnabled
+    * Browser appName (always "Netscape" on modern browsers) - navigator.appName
+    * Screen Color Depth - screen.colorDepth
+    * String representation of setTimeout function (used to detect tampering, it should return function setTimeout() { [native code] } but if a wrapper is being used it will return something different) - setTimeout.toString()
+    * String representation of setInterval function (same reasoning as above) - setInterval.toString()
 
 ### Proof of Work
 
@@ -163,9 +163,10 @@ This seemed to be very complicated, and given that there was only a few variable
     var _0x174c = ["/dstl-wp.js?PID=FA07FD5E-619C-38C3-83F2-EB07F1B68C83", "\x49\x6E\x74\x65\x72\x6E\x65\x74\x20\x45\x78\x70\x6C\x6F\x72\x65\x72", "\x46\x69\x72\x65\x66\x6F\x78", "\x43\x68\x72\x6F\x6D\x65", "\x43\x68\x72\x6F\x6D\x69\x75\x6D", 
     ...
 
-I then replaced there values in manually in the rest of the code.  The variables were mostly smaller part of larger strings (i.e. "hantom", "elenium", "etc").  My final version can be found at [https://pastebin.com/rp2Xu0Jt](https://pastebin.com/rp2Xu0Jt). 
+I then replaced their values in manually throughout the rest of the code.  The variables were mostly smaller part of larger strings (i.e. "hantom", "elenium", "etc").  My final version can be found at [https://pastebin.com/rp2Xu0Jt](https://pastebin.com/rp2Xu0Jt). 
 
 This gave me:
+
     var _0x9e50x19 = ["__driver_evaluate", "__webdriver_evaluate", "__selenium_evaluate", "__fxdriver_evaluate", "__driver_unwrapped", "__webdriver_unwrapped", "__selenium_unwrapped", "__fxdriver_unwrapped", "__webdriver_script_function", "__webdriver_script_func", "__webdriver_script_fn"];
     var _0x9e50x1a = ["_Selenium_IDE_Recorder", "_phantom", "_selenium", "callPhantom", "callSelenium", "__nightmare"];
 
@@ -173,28 +174,28 @@ Now, we can finally understand the headless detection portion of the code.
 
 The automated/headless browser detection code checks for the presence of:
 
-    * Selenium - ```document.__driver_evaluate```
-    * Selenium - ```document.__webdriver_evaluate```
-    * Selenium - ```document.__selenium_evaluate```
-    * Selenium - ```document.__fxdriver_evaluate```
-    * Selenium - ```document.__driver_unwrapped```
-    * Selenium - ```document.__webdriver_unwrapped```
-    * Selenium - ```document.__selenium_unwrapped```
-    * Selenium - ```document.__fxdriver_unwrapped```
-    * Selenium - ```document.__webdriver_script_function```
-    * Selenium - ```document.__webdriver_script_func```
-    * Selenium - ```document.__webdriver_script_fn```
-    * Selenium - ```window._Selenium_IDE_Recorder```
-    * PhantomJS - ```window._phantom```
-    * Selenium - ```window._selenium```
-    * PhantomJS - ```window.callPhantom```
-    * Selenium - ```window.callSelenium```
-    * NightmareJS - ```window.__nightmare```
+    * Selenium - document.__driver_evaluate
+    * Selenium - document.__webdriver_evaluate
+    * Selenium - document.__selenium_evaluate
+    * Selenium - document.__fxdriver_evaluate
+    * Selenium - document.__driver_unwrapped
+    * Selenium - document.__webdriver_unwrapped
+    * Selenium - document.__selenium_unwrapped
+    * Selenium - document.__fxdriver_unwrapped
+    * Selenium - document.__webdriver_script_function
+    * Selenium - document.__webdriver_script_func
+    * Selenium - document.__webdriver_script_fn
+    * Selenium - window._Selenium_IDE_Recorder
+    * PhantomJS - window._phantom
+    * Selenium - window._selenium
+    * PhantomJS - window.callPhantom
+    * Selenium - window.callSelenium
+    * NightmareJS - window.__nightmare
     * Regex to check for the presence $cdc and $wdc variables in document which are created by Selenium and other headless browsers.  See this [StackOverflow](https://stackoverflow.com/a/41220267) answer for more.
-    * Sequentum (web scraping company) check - ```window["external"].toString()["indexOf"]("Sequentum") != -1)```
-    * Selenium - ```window["document"]["documentElement"]["getAttribute"]("selenium")```
-    * Selenium - ```window["document"]["documentElement"]["getAttribute"]("webdriver")```
-    * Selenium - ```window["document"]["documentElement"]["getAttribute"]("driver")```
+    * Sequentum (web scraping company) check - window["external"].toString()["indexOf"]("Sequentum") != -1)
+    * Selenium - window["document"]["documentElement"]["getAttribute"]("selenium")
+    * Selenium - window["document"]["documentElement"]["getAttribute"]("webdriver")
+    * Selenium - window["document"]["documentElement"]["getAttribute"]("driver")
 
 
 ## Conclusion
