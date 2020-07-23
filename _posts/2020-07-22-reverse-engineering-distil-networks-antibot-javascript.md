@@ -53,7 +53,7 @@ This code collects (via JavaScript):
 
 ### Proof of Work
 
-After collecting all of this information, Distil then runs its "proof of work."  Similar to the Cloudflare Under Attack mode, your browser basically generates some sort of token using JavaScript that the server then checks and (hopefully) ensures it was generated with the JavaScript.  Distil's "proof of work" seems to just be generating random alphanumeric characters and adding the current date to it.
+After collecting all of this information, Distil then runs its "proof of work."  Similar to the Cloudflare Under Attack mode, your browser basically generates some sort of token using JavaScript that the server then checks and (hopefully) ensures it was generated with the JavaScript.  Distil's "proof of work" seems to just be generating random alphanumeric characters and doing some basic math calculations with them.
 
     function t(e) {
       for (var t = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", r = "", n = 0; e > n; ++n) r += t.substr(Math.floor(Math.random() * t.length), 1);
@@ -64,6 +64,17 @@ After collecting all of this information, Distil then runs its "proof of work." 
     r.mine(n, 8, function (t) {
       h("DistilProofOfWorkStop"), e({proof: t});
     });
+
+    ...
+
+    mine: function(e, t, r) {
+        for (var i = 0, a = Math.pow(2, 32 - t);;) {
+            var o = i.toString(16) + ":" + e;
+            i++;
+            var s = n(o);
+            if (parseInt(s.substr(0, 8), 16) < a) return void r(o)
+        }
+    }
 
 
 ### Browser Automation Testing
