@@ -212,4 +212,4 @@ The automated/headless browser detection code checks for the presence of:
 ## Conclusion
 The above effort was a few hours of work and further shows the ineffectiveness of "security through obscurity" (unless you're Google - I don't think anyone has figured out Botguard).  I also found that while the fingerprinting was pretty comprehensive, the bot detection was lack luster.  A cursory glance at any ad fraud/viewability vendor script will confirm this (CSS checks, browser specific API checks, and many more ideas are not implemented).
 
-1.  An archived copy of the code can be found at [https://pastebin.com/y5iu5iih](https://pastebin.com/rp2Xu0Jt).  My final deobfuscated version can be found at [https://pastebin.com/rp2Xu0Jt](https://pastebin.com/rp2Xu0Jt).
+1.  An archived copy of the code can be found at [https://pastebin.com/0RdkFt0i](https://pastebin.com/0RdkFt0i).  My final deobfuscated version can be found at [https://pastebin.com/rp2Xu0Jt](https://pastebin.com/rp2Xu0Jt).
