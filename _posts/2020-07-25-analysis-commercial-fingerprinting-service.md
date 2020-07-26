@@ -48,7 +48,7 @@ We will now look at the attributes collected by the script.
     * Adblock status - Creating a new element with class "adsbox," adding some text to it, appending it to the body, and checking that its height equals 0 (if yes, then an adblocker is enabled)
     * Canvas fingerprinting - Creating a new Canvas, drawing "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" over it in multiple different colors with a rainbow background, then using the toDataURL function to get the base64 PNG representation
     * Private Browser Mode detection - Trying to write data using localStorage, indexedDB, or requestFileSystem
-    * Font detection - getting the width/height of the browser "fallback" (default) serif, sans-serif, and monospaces fonts, then measuring the width of a bunch of fonts (Augur's list has over 800) and seeing if there is any differences between the tested font and the defaults
+    * Font detection - Getting the width/height of the browser "fallback" (default) serif, sans-serif, and monospaces fonts, then measuring the width of a bunch of fonts (Augur's list has over 800) and seeing if there is any differences between the tested font and the defaults
     * Media devices (speakers, cameras, microphones) enumeration - navigator.mediaDevices.enumerateDevices
     * Installed plugins enumeration - navigator.plugins
     * Spoofing detection
