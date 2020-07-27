@@ -106,9 +106,8 @@ Now that we have the deobfuscated (mostly) code [3], we can go over the indicato
           Q1J["ieVerLessThan8"] = document["getElementsByTagName"]("i")["length"] === 1;
     * Touchscreen max touch points - navigator.maxTouchPoints
     * Browser engine detection - Creating a new element, iterating over its style attribute, and checking for prefixed CSS attributes (moz, webkit, ms)
-
+    * STUN Local/Remote IP Address - RTCPeerConnection to 52.23.111.175:3478 and stun:ec2-52-23-111-175.compute-1.amazonaws.com:3478
 
 1. Available at https://pastebin.com/feCCWqMW.
 2. Originally available at https://cdn4.forter.com/script.js?sn=6bc22bdd02fc.  The version my deobfuscation script was tested on can be found at https://pastebin.com/ALqJxrvM.
 3. Available at https://pastebin.com/QJxHYz0z.
-
