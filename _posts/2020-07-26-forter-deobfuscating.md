@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deobfuscating Forter's Fraud Prevention JavaScript
+title: Analyzing Forter's Fraud Prevention JavaScript
 tags: [javascript, reverse engineering]
 ---
 Forter is a fraud prevention vendor for ecommerce sites.  They collect a large number of signals in JavaScript to decide whether to allow a transaction or not.  I hacked together a script [1] again using Jarrod Overson's great [shift-refactor](https://github.com/jsoverson/shift-refactor) library.  A sample of their code can be found at [2].  This undoes their annoying string obfuscation (setting a bunch of strings at the top of the file and then using them later, combining a bunch of strings, and some XOR based things).  
