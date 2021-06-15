@@ -4,7 +4,7 @@ title: How Websites Know You're Lying About Your User-Agent
 tags: [javascript, reverse engineering, fingerprinting]
 ---
 
-Spoofing a browser's user agent is often hailed as a privacy enhancing technique.  On the Chrome Store, there are [dozens of extensions](https://chrome.google.com/webstore/search/user%20agent?_category=extensions) allowing you to switch your user agent.  Unfortunately, due to the abundance of methods to detect browser and operating system information (as will be discussed in this article), these extensions do not meaningfully enhance privacy.  There are some other reasons to change a browser's user agent, for example to test the mobile version of a website, or to bypass rate limits while scraping.  Bot detection and fingerprinting vendors like Distil Networks, Imperva, WhiteOps, etc are all getting smarter about detecting this kind of spoofing.  This post will reveal some of the techniques they use and illustrate the futility of many of these browser extensions.
+Spoofing a browser's user agent is often hailed as a privacy enhancing technique.  On the Chrome Store, there are [dozens of extensions](https://chrome.google.com/webstore/search/user%20agent?_category=extensions) allowing you to switch your user agent.  Unfortunately, due to the abundance of other methods to detect browser and operating system information (as will be discussed in this article), these extensions do not meaningfully enhance privacy.  There are some other reasons to change a browser's user agent, for example to test the mobile version of a website, or to bypass rate limits while scraping.  Bot detection and fingerprinting vendors like Distil Networks, Imperva, WhiteOps, etc are all getting smarter about detecting this kind of spoofing.  This post will reveal some of the techniques they use and illustrate the futility of many of these browser extensions.
 
 ## Preface: What is a user agent?
 
@@ -131,6 +131,7 @@ Firefox:
     window.PERSISTENT !== undefined -> false
     window.chrome !== undefined -> false
     window.InstallTrigger !== undefined -> true
+
 
 ##### Navigator Object
 `window.navigator` provides information about the operating system and browser of the client.  Most spoofing extensions update the values here but many do not.  `navigator.userAgent` should equal the header sent over HTTP, for instance.  If your browser purports to be Chrome, `navigator.vendor` should equal "Google Inc."  Furthermore, plugins across browsers often vary.  Chrome always has the Chrome PDF viewer installed whereas Firefox often does not have any plugins at all (making `navigator.plugins.length` equal 0).  There are other details like [`navigator.productSub`](https://stackoverflow.com/questions/13880858/why-does-navigator-productsub-always-equals-20030107-on-chrome-and-safari) that also may be of interest.  The architecture and OS returned by `navigator.platform` should also match the value in the User-Agent string.
