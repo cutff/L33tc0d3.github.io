@@ -67,7 +67,15 @@ This can result in the control flow graph becoming significantly more complicate
 
 "Junk code" is useless code that does not affect the functionality of the program.  It is often used by malware to evade signature detection.
 
-For instance, ![the pictured code from a botnet](https://www.welivesecurity.com/wp-content/uploads/2020/03/Figure-12.png) makes Windows API calls but does not use the result in any way.  There are simpler ways too, like adding assembly instructions that don't do anything: ![dead asm code](https://sensorstechforum.com/wp-content/uploads/2017/08/Figure-3-sensorstechforum-com.png).  [Obfuscator-LLVM](https://github.com/obfuscator-llvm/obfuscator/blob/llvm-4.0/lib/Transforms/Obfuscation/BogusControlFlow.cpp#L361) implements this as part of their bogus control flow component.  Essentially, for every block of code, they replace it with an if statement (branch instruction) with an opaque predicate that is always true, then put everything that was formerly in the block under that if statement along with randomly generated arithmetic instructions.
+For instance, this code from a botnet
+
+![the pictured code from a botnet](https://www.welivesecurity.com/wp-content/uploads/2020/03/Figure-12.png)
+
+makes Windows API calls but does not use the result in any way.  There are simpler ways too, like adding assembly instructions that don't do anything:
+
+![dead asm code](https://sensorstechforum.com/wp-content/uploads/2017/08/Figure-3-sensorstechforum-com.png).
+
+[Obfuscator-LLVM](https://github.com/obfuscator-llvm/obfuscator/blob/llvm-4.0/lib/Transforms/Obfuscation/BogusControlFlow.cpp#L361) implements this as part of their bogus control flow component.  Essentially, for every block of code, they replace it with an if statement (branch instruction) with an opaque predicate that is always true, then put everything that was formerly in the block under that if statement along with randomly generated arithmetic instructions.
 
 ### Control Flow Flattening
 
@@ -135,11 +143,15 @@ VMProtect is famous for doing this.  This is also becoming common increasingly c
 
 We can first see that they are passing a giant text blob as an argument to a function.  This is the bytecode, base64 encoded (it goes on for another 240k characters). ![encoded bytecode](https://i.imgur.com/y1fGAI6.png).
 
-Now we can see the function that actually executes the instructions: ![executor function](https://i.imgur.com/cx5hTre.png) 
+Now we can see the function that actually executes the instructions:
 
-The variable names makes it difficult to understand but essentially it is iterating over all the instructions in the (at this point decoded) bytecode and executing them.  We can see it is getting values from the `c` array, which is really just a list of instructions containing operations in Javascript: ![instructions in array titled c](https://i.imgur.com/KABsfsQ.png)
+![executor function](https://i.imgur.com/cx5hTre.png) 
 
-This makes reverse engineering significantly more difficult because it requires analysts to figure out your new instruction set and transform into a form they/their tools can actually understand.
+The variable names makes it difficult to understand but essentially it is iterating over all the instructions in the (at this point decoded) bytecode and executing them.  We can see it is getting values from the `c` array, which is really just a list of instructions containing operations in Javascript:
+
+![instructions in array titled c](https://i.imgur.com/KABsfsQ.png)
+
+This makes reverse engineering significantly more difficult because it requires analysts to figure out your new instruction set and transform it into a form they/their tools can actually understand.
 
 ## Conclusion
 
